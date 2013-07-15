@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Siredoc</title>
+		<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+		<![endif]-->
+		<%= stylesheet_link_tag    "application", :media => "all" %>
+		<%= javascript_include_tag "application" %>
+		<%= csrf_meta_tags %>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body>
+		<div class="navbar navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+					<a class="brand" href="/">Siredoc - Cadastros</a>
+					<div class="nav-collapse">
+						<ul class="nav">
+							<% if user_signed_in? %>
+							<li>
+								<%= link_to "Cartórios" %>
+							</li>
+							<li>
+								<%= link_to "Aposentados" %>
+							</li>
+							<li>
+								<%= link_to "Trocar Senha", edit_user_registration_path() %>
+							</li>
+							<li>
+								<%= link_to "Sair", destroy_user_session_path, :method=>'delete' %>
+							</li>
+							<% else %>
+							<li>
+								<%= link_to "Entrar", "/users/sign_in" %>
+							</li>
+							<li>
+								<%= link_to "Esqueci Minha Senha", new_user_password_path %>
+							</li>
+							<li>
+								<%= link_to "Cadastre-se", "/users/sign_up" %>
+							</li>
+							<% end %>
+							<li>
+								<%= link_to "Fale Conosco" %>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="span9">
+       					<p class="notice"><%= notice %></p>
+       					<p class="alert"><%= alert %></p>
+       					<%= yield %>
+				</div>
+				<div class="span3">
+					<h2>Título Boas Vindas</h2>
+					<p>
+						Texto de boas vindas com explicações do objetivo da ferramenta e breves descrições das funcionalidades...
+					</p>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>
