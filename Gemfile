@@ -26,6 +26,7 @@ gem 'devise', '3.0.0.rc'
 
 gem 'devise-i18n-views'
 
+gem 'gmaps4rails'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
