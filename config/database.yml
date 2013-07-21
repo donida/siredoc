@@ -45,7 +45,7 @@ production:
   encoding: utf8
   database: sirecob
   username: postgres
-  password: postgres
-  host: localhost
+  password: revolua123
+  host: 172.31.27.20
   pool: 5
   timeout: 5000
