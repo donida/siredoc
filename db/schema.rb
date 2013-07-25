@@ -11,7 +11,63 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130714040411) do
+ActiveRecord::Schema.define(version: 20130724001841) do
+
+  create_table "atribuicaos", force: true do |t|
+    t.string   "nome",            null: false
+    t.string   "chave",           null: false
+    t.integer  "tipoRegistro_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "atribuicaos", ["chave"], name: "index_atribuicaos_on_chave", unique: true, using: :btree
+  add_index "atribuicaos", ["nome"], name: "index_atribuicaos_on_nome", using: :btree
+  add_index "atribuicaos", ["tipoRegistro_id"], name: "index_atribuicaos_on_tipoRegistro_id", using: :btree
+
+  create_table "cidades", force: true do |t|
+    t.string   "nome",       null: false
+    t.string   "sigla"
+    t.integer  "estado_id",  null: false
+    t.integer  "comarca_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cidades", ["comarca_id"], name: "index_cidades_on_comarca_id", using: :btree
+  add_index "cidades", ["estado_id"], name: "index_cidades_on_estado_id", using: :btree
+  add_index "cidades", ["nome"], name: "index_cidades_on_nome", using: :btree
+  add_index "cidades", ["sigla"], name: "index_cidades_on_sigla", using: :btree
+
+  create_table "comarcas", force: true do |t|
+    t.string   "nome",       null: false
+    t.integer  "chave",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comarcas", ["chave"], name: "index_comarcas_on_chave", unique: true, using: :btree
+  add_index "comarcas", ["nome"], name: "index_comarcas_on_nome", unique: true, using: :btree
+
+  create_table "estados", force: true do |t|
+    t.string   "nome",       null: false
+    t.string   "sigla"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "estados", ["nome"], name: "index_estados_on_nome", unique: true, using: :btree
+  add_index "estados", ["sigla"], name: "index_estados_on_sigla", unique: true, using: :btree
+
+  create_table "tipo_registros", force: true do |t|
+    t.string   "nome"
+    t.string   "chave"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tipo_registros", ["chave"], name: "index_tipo_registros_on_chave", unique: true, using: :btree
+  add_index "tipo_registros", ["nome"], name: "index_tipo_registros_on_nome", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false

@@ -1,0 +1,9 @@
+<%= form_for @estado, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :html => { :class => "form-horizontal" } do |f| %>
+      <%= f.text_field :nome %>
+      <%= f.text_field :sigla %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                estados_path, :class => 'btn' %>
+  </div>
+<% end %>
