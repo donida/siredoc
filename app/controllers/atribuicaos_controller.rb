@@ -69,6 +69,6 @@ class AtribuicaosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def atribuicao_params
-      params.require(:atribuicao).permit(:name, :chave, :tipoCartorio_id)
+      params.require(:atribuicao).permit(:nome, :chave, :tipoCartorio_id)
     end
 end

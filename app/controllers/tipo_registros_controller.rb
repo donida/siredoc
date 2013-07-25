@@ -69,6 +69,6 @@ class TipoRegistrosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tipo_registro_params
-      params.require(:tipo_registro).permit(:name, :chave)
+      params.require(:tipo_registro).permit(:nome, :chave)
     end
 end
