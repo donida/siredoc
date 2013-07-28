@@ -28,7 +28,7 @@ class EstadosController < ApplicationController
 
     respond_to do |format|
       if @estado.save
-        format.html { redirect_to @estado, notice: 'Estado was successfully created.' }
+        format.html { redirect_to @estado, notice: 'Estado foi criado(a) com sucesso.' }
         format.json { render action: 'show', status: :created, location: @estado }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class EstadosController < ApplicationController
   def update
     respond_to do |format|
       if @estado.update(estado_params)
-        format.html { redirect_to @estado, notice: 'Estado was successfully updated.' }
+        format.html { redirect_to @estado, notice: 'Estado foi atualizado(a) com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

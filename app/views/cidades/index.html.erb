@@ -18,8 +18,8 @@
       <tr>
         <td><%= link_to cidade.id, cidade_path(cidade) %></td>
         <td><%= cidade.nome %></td>
-        <td><%= Estado.find_by_id(cidade.estado_id).nome %></td>
-        <td><%= c = Comarca.find_by_id(cidade.comarca_id); c == nil ? 'Nao Cadastrado' : c.nome  %></td>
+        <td><%= cidade.estado.nome %></td>
+        <td><%= cidade.comarca_id == nil ? 'Nao Cadastrado' : cidade.comarca.nome  %></td>
         <td><%=l cidade.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

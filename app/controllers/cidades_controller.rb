@@ -4,7 +4,7 @@ class CidadesController < ApplicationController
   # GET /cidades
   # GET /cidades.json
   def index
-    @cidades = Cidade.all
+    @cidades = Cidade.find(:all, :order => "nome asc", :limit => 10)
   end
 
   # GET /cidades/1
@@ -28,7 +28,7 @@ class CidadesController < ApplicationController
 
     respond_to do |format|
       if @cidade.save
-        format.html { redirect_to @cidade, notice: 'Cidade was successfully created.' }
+        format.html { redirect_to @cidade, notice: 'Cidade foi criado(a) com sucesso.' }
         format.json { render action: 'show', status: :created, location: @cidade }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class CidadesController < ApplicationController
   def update
     respond_to do |format|
       if @cidade.update(cidade_params)
-        format.html { redirect_to @cidade, notice: 'Cidade was successfully updated.' }
+        format.html { redirect_to @cidade, notice: 'Cidade foi atualizada com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -28,7 +28,7 @@ class ComarcasController < ApplicationController
 
     respond_to do |format|
       if @comarca.save
-        format.html { redirect_to @comarca, notice: 'Comarca was successfully created.' }
+        format.html { redirect_to @comarca, notice: 'Comarca foi criado(a) com sucesso.' }
         format.json { render action: 'show', status: :created, location: @comarca }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ComarcasController < ApplicationController
   def update
     respond_to do |format|
       if @comarca.update(comarca_params)
-        format.html { redirect_to @comarca, notice: 'Comarca was successfully updated.' }
+        format.html { redirect_to @comarca, notice: 'Comarca foi atualizado(a) com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

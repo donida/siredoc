@@ -1,7 +1,6 @@
 <h2>Reenviar Instruções de Confirmação</h2>
 
 <%= form_for(resource, :as => resource_name, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
 
   <%= f.email_field :email, :autofocus => true %>
 

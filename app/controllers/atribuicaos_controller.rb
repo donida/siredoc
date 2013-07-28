@@ -28,7 +28,7 @@ class AtribuicaosController < ApplicationController
     
     respond_to do |format|
       if @atribuicao.save
-        format.html { redirect_to @atribuicao, notice: 'Atribuicao was successfully created.' }
+        format.html { redirect_to @atribuicao, notice: 'Atribuicao foi criado(a) com sucesso.' }
         format.json { render action: 'show', status: :created, location: @atribuicao }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class AtribuicaosController < ApplicationController
   def update
     respond_to do |format|
       if @atribuicao.update(atribuicao_params)
-        format.html { redirect_to @atribuicao, notice: 'Atribuicao was successfully updated.' }
+        format.html { redirect_to @atribuicao, notice: 'Atribuicao foi atualizado(a) com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

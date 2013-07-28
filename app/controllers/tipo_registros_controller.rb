@@ -28,7 +28,7 @@ class TipoRegistrosController < ApplicationController
 
     respond_to do |format|
       if @tipo_registro.save
-        format.html { redirect_to @tipo_registro, notice: 'Tipo registro was successfully created.' }
+        format.html { redirect_to @tipo_registro, notice: 'Tipo registro foi criado(a) com sucesso.' }
         format.json { render action: 'show', status: :created, location: @tipo_registro }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class TipoRegistrosController < ApplicationController
   def update
     respond_to do |format|
       if @tipo_registro.update(tipo_registro_params)
-        format.html { redirect_to @tipo_registro, notice: 'Tipo registro was successfully updated.' }
+        format.html { redirect_to @tipo_registro, notice: 'Tipo registro foi atualizado(a) com sucesso.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
