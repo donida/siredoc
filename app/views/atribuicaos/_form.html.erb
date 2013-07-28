@@ -4,7 +4,7 @@
   <div class="control-group">
     <%= f.label :tipoRegistro_id, :class => 'control-label' %>
     <div class="controls">
-      <%= select("post", "tipoRegistro_id", TipoRegistro.all.collect {|t| [ t.nome, t.id ] }, {include_blank: 'Selecione'}) %>
+      <%= select("atribuicao", "tipoRegistro_id", TipoRegistro.all.collect {|t| [ t.nome, t.id ] }, {include_blank: 'Selecione'}) %>
     </div>
   </div>
   <div class="form-actions">

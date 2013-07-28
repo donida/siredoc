@@ -8,7 +8,6 @@
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nome) %></th>
       <th><%= model_class.human_attribute_name(:chave) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,7 +17,6 @@
         <td><%= link_to tipo_registro.id, tipo_registro_path(tipo_registro) %></td>
         <td><%= tipo_registro.nome %></td>
         <td><%= tipo_registro.chave %></td>
-        <td><%=l tipo_registro.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_tipo_registro_path(tipo_registro), :class => 'btn btn-mini' %>
@@ -33,6 +31,8 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_tipo_registro_path,
-            :class => 'btn btn-primary' %>
+  <div class="form-actions">
+		<%= link_to t('.new', :default => t("helpers.links.new")),
+        	    new_tipoRegistro_path,
+            	:class => 'btn btn-primary' %>
+  </div>

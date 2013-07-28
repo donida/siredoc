@@ -4,7 +4,8 @@ class AtribuicaosController < ApplicationController
   # GET /atribuicaos
   # GET /atribuicaos.json
   def index
-    @atribuicaos = Atribuicao.all
+    @atribuicaos = Atribuicao.paginate(:page => params[:page], :order => 'nome asc', :per_page => 10)
+    #@atribuicaos = Atribuicao.all
   end
 
   # GET /atribuicaos/1
@@ -69,6 +70,6 @@ class AtribuicaosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def atribuicao_params
-      params.require(:atribuicao).permit(:nome, :chave, :tipoCartorio_id)
+      params.require(:atribuicao).permit(:nome, :chave, :tipoRegistro_id)
     end
 end

@@ -2,13 +2,13 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
+<%= will_paginate @comarcas, :class => 'flickr_pagination' %>
 <table class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nome) %></th>
       <th><%= model_class.human_attribute_name(:chave) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -18,7 +18,6 @@
         <td><%= link_to comarca.id, comarca_path(comarca) %></td>
         <td><%= comarca.nome %></td>
         <td><%= comarca.chave %></td>
-        <td><%=l comarca.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_comarca_path(comarca), :class => 'btn btn-mini' %>
@@ -33,8 +32,9 @@
   </tbody>
 </table>
 
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_comarca_path,
-            :class => 'btn btn-primary' %>
-
+  <div class="form-actions">
+		<%= link_to t('.new', :default => t("helpers.links.new")),
+        	    new_comarca_path,
+            	:class => 'btn btn-primary' %>
+  </div>
 

@@ -4,7 +4,8 @@ class ComarcasController < ApplicationController
   # GET /comarcas
   # GET /comarcas.json
   def index
-    @comarcas = Comarca.all
+    @comarcas = Comarca.paginate(:page => params[:page], :order => 'nome asc', :per_page => 10)
+#    @comarcas = Comarca.all
   end
 
   # GET /comarcas/1
