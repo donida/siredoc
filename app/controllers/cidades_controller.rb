@@ -4,7 +4,8 @@ class CidadesController < ApplicationController
   # GET /cidades
   # GET /cidades.json
   def index
-    @cidades = Cidade.find(:all, :order => "nome asc", :limit => 10)
+    @cidades = Cidade.paginate(:page => params[:page], :order => 'nome asc', :per_page => 10)
+#    @cidades = Cidade.find(:all, :order => "nome asc", :limit => 10)
   end
 
   # GET /cidades/1
