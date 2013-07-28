@@ -20,6 +20,7 @@
 					<div class="nav-collapse">
 						<ul class="nav">
 							<% if user_signed_in? %>
+							<% if current_user.admin? %>
 							<li>
 								<%= link_to "Atribuição", atribuicaos_path %>
 							</li>
@@ -35,17 +36,10 @@
 							<li>
 								<%= link_to "Cidade", cidades_path %>
 							</li>
-							<!--
 							<li>
-								<%= link_to "Cartório" %>
+								<%= link_to "Novo Usuário", user_session_path, :method=>'create' %>
 							</li>
-							<li>
-								<%= link_to "Aposentado" %>
-							</li>
-							<li>
-								<%= link_to "Juíz de Paz" %>
-							</li>
-							-->
+							<% end %>
 							<li>
 								<%= link_to "Trocar Senha", edit_user_registration_path() %>
 							</li>
@@ -54,13 +48,10 @@
 							</li>
 							<% else %>
 							<li>
-								<%= link_to "Entrar", "/users/sign_in" %>
+								<%= link_to "Entrar", new_user_session_path, :method => 'new' %>
 							</li>
 							<li>
 								<%= link_to "Esqueci Minha Senha", new_user_password_path %>
-							</li>
-							<li>
-								<%= link_to "Cadastre-se", "/users/sign_up" %>
 							</li>
 							<% end %>
 							<li>

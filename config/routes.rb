@@ -11,7 +11,9 @@ Siredoc::Application.routes.draw do
 
   resources :tipo_registros
 
-  devise_for :users
+  resources :users
+  
+  devise_for :users, :path_prefix => 'dev'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
