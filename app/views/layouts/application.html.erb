@@ -44,7 +44,7 @@
 								<%= link_to "Cartório", cartorios_path %>
 							</li>
 							<li>
-								<%= link_to "Trocar Senha", edit_user_registration_path() %>
+								<%= link_to "Trocar Senha", edit_user_path(current_user.id) %>
 							</li>
 							<li>
 								<%= link_to "Sair", destroy_user_session_path, :method=>'delete' %>

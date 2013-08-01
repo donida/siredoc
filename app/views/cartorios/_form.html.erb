@@ -3,7 +3,6 @@
       <%= f.text_field :nome, :class => 'text_field' %>
 	  <%= f.collection_select :atribuicao_id, Atribuicao.all, :id, :nome %>
 	  <%= f.collection_select :comarca_id, Comarca.all, :id, :nome %>
-	  <%= f.collection_select :estado_id, Estado.all, :id, :nome, :fake %>
 	  <%= f.collection_select :cidade_id, Cidade.all, :id, :nome %>
       <%= f.text_field :bairro, :class => 'text_field' %>
       <%= f.text_field :rua, :class => 'text_field' %>
