@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130728070657) do
+ActiveRecord::Schema.define(version: 20130729122605) do
 
   create_table "atribuicaos", force: true do |t|
     t.string   "nome",            null: false
@@ -24,6 +24,35 @@ ActiveRecord::Schema.define(version: 20130728070657) do
   add_index "atribuicaos", ["chave"], name: "index_atribuicaos_on_chave", unique: true, using: :btree
   add_index "atribuicaos", ["nome"], name: "index_atribuicaos_on_nome", using: :btree
   add_index "atribuicaos", ["tipoRegistro_id"], name: "index_atribuicaos_on_tipoRegistro_id", using: :btree
+
+  create_table "cartorios", force: true do |t|
+    t.integer  "codigo"
+    t.string   "nome"
+    t.integer  "atribuicao_id"
+    t.integer  "comarca_id"
+    t.integer  "cidade_id"
+    t.string   "bairro"
+    t.string   "rua"
+    t.integer  "numero"
+    t.string   "complemento"
+    t.string   "cep"
+    t.string   "telefone"
+    t.string   "celular"
+    t.string   "email"
+    t.text     "historico"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cartorios", ["atribuicao_id"], name: "index_cartorios_on_atribuicao_id", using: :btree
+  add_index "cartorios", ["bairro"], name: "index_cartorios_on_bairro", using: :btree
+  add_index "cartorios", ["cep"], name: "index_cartorios_on_cep", using: :btree
+  add_index "cartorios", ["cidade_id"], name: "index_cartorios_on_cidade_id", using: :btree
+  add_index "cartorios", ["codigo"], name: "index_cartorios_on_codigo", unique: true, using: :btree
+  add_index "cartorios", ["comarca_id"], name: "index_cartorios_on_comarca_id", using: :btree
+  add_index "cartorios", ["historico"], name: "index_cartorios_on_historico", using: :btree
+  add_index "cartorios", ["nome"], name: "index_cartorios_on_nome", using: :btree
+  add_index "cartorios", ["rua"], name: "index_cartorios_on_rua", using: :btree
 
   create_table "cidades", force: true do |t|
     t.string   "nome",       null: false

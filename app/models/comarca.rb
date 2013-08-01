@@ -1,3 +1,4 @@
 class Comarca < ActiveRecord::Base
-  validates_presence_of :nome, :chave
+  belongs_to :cidade
+  validates_presence_of :nome, :chave, :cidade_id
 end

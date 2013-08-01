@@ -1,4 +1,6 @@
 Siredoc::Application.routes.draw do
+  resources :cartorios
+
   resources :comarcas
 
   resources :cidades

@@ -1,18 +1,7 @@
 <%= form_for @cidade, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :html => { :class => "form-horizontal" } do |f| %>
       <%= f.text_field :nome %>
       <%= f.text_field :sigla %>
-  <div class="control-group estado_id">
-    <%= f.label :estado_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= select("cidade", "estado_id", Estado.all.collect {|e| [ e.nome, e.id ] }, {include_blank: 'Selecione'}) %>
-    </div>
-  </div>
-  <div class="control-group comarca_id">
-    <%= f.label :comarca_id, :class => 'control-label' %>
-    <div class="controls">
-       <%= select("cidade", "comarca_id", Comarca.all.collect {|c| [ c.nome, c.id ] }, {include_blank: 'Selecione'}) %>
-    </div>
-  </div>
+	  <%= f.collection_select :estado_id, Estado.all, :id, :nome %>
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),

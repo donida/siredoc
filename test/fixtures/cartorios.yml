@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  codigo: 1
+  nome: MyString
+  tipoRegistro_id: 
+  atribuicao_id: 
+  comarca_id: 
+  cidade_id: 
+  bairro: MyString
+  rua: MyString
+  cep: MyString
+  telefone: MyString
+  celular: MyString
+  email: MyString
+  historico: MyText
+
+two:
+  codigo: 1
+  nome: MyString
+  tipoRegistro_id: 
+  atribuicao_id: 
+  comarca_id: 
+  cidade_id: 
+  bairro: MyString
+  rua: MyString
+  cep: MyString
+  telefone: MyString
+  celular: MyString
+  email: MyString
+  historico: MyText

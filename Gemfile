@@ -22,7 +22,7 @@ gem 'less-rails'
 
 gem 'twitter-bootstrap-rails'
 
-gem 'devise', '3.0.0.rc'
+#gem 'devise', '3.0.0.rc'
 
 gem 'devise-i18n-views'
 
@@ -42,6 +42,10 @@ gem 'jbuilder', '~> 1.2'
 gem 'twitter-bootstrap-form-builder'
 
 gem 'will_paginate'
+
+# gem 'protected_attributes'
+
+gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 
 group :doc do
 # bundle exec rake doc:rails generates the API under doc/api.
