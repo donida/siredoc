@@ -70,6 +70,6 @@ class ComarcasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comarca_params
-      params.require(:comarca).permit(:nome, :chave, :cidade_id)
+      params.require(:comarca).permit(:nome, :chave)
     end
 end

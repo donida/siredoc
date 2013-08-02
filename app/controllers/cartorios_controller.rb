@@ -27,10 +27,12 @@ class CartoriosController < ApplicationController
   # GET /cartorios/1/edit
   def edit
     @estados = Estado.all
-    @cidades = Cidade.find_by_estado_id(params[@cartorio.cidade.estado_id])
+    @cidades = Cidade.all
+    #.find_by_estado_id(params[@cartorio.cidade.estado_id])
     @comarcas = Comarca.all
     @tipoRegistros = TipoRegistro.all
-    @atribuicoes = Atribuicao.find_by_tipo_registro_id(params[@cartorio.atribuicao.tipoRegistro_id])
+    @atribuicoes = Atribuicao.all
+    #find_by_tipoRegistro_id(params[@cartorio.atribuicao.tipoRegistro.id])
   end
 
   # POST /cartorios

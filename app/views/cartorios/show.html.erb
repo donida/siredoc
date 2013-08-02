@@ -9,7 +9,7 @@
   <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
   <dd><%= @cartorio.nome %></dd>
   <dt><strong><%= model_class.human_attribute_name(:tipoRegistro_id) %>:</strong></dt>
-  <dd><%= @cartorio.tipoRegistro_id %></dd>
+  <dd><%= @cartorio.atribuicao == nil ? 'Não Informado' : @cartorio.atribuicao.tipoRegistro.nome %></dd>
   <dt><strong><%= model_class.human_attribute_name(:atribuicao_id) %>:</strong></dt>
   <dd><%= @cartorio.atribuicao_id == nil ? 'Não informado' : @cartorio.atribuicao.nome %></dd>
   <dt><strong><%= model_class.human_attribute_name(:comarca_id) %>:</strong></dt>
