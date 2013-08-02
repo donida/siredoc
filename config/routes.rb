@@ -1,6 +1,11 @@
 Siredoc::Application.routes.draw do
+  
   resources :cartorios
 
+  get '/update_cidades', :controller => 'cartorios', :action => 'update_cidades'
+  get '/update_atribuicoes', :controller => 'cartorios', :action => 'update_atribuicoes'
+  
+  
   resources :comarcas
 
   resources :cidades
@@ -18,6 +23,11 @@ Siredoc::Application.routes.draw do
   devise_for :users, :path_prefix => 'dev'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+
+  #match '/update_cidades' => get 'cartorio#update_cidades'
+  #get '/update_cidades' => 'cartorio#update_cidades'
+  
+ #get "/update_cidades" => "cartorio#update_versions"
 
   root 'index#index'
 
