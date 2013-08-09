@@ -1,8 +1,5 @@
 <%- model_class = Cartorio -%>
-<div class="page-header">
-  <h2><%=t '.title', :default => model_class.model_name.human.titleize %></h2>
-</div>
-
+                <hr style="margin: 5px">
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:codigo) %>:</strong></dt>
   <dd><%= @cartorio.id %></dd>
