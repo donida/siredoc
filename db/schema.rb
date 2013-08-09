@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130729122605) do
+ActiveRecord::Schema.define(version: 20130805012653) do
 
   create_table "atribuicaos", force: true do |t|
     t.string   "nome",            null: false
@@ -25,10 +25,17 @@ ActiveRecord::Schema.define(version: 20130729122605) do
   add_index "atribuicaos", ["nome"], name: "index_atribuicaos_on_nome", using: :btree
   add_index "atribuicaos", ["tipoRegistro_id"], name: "index_atribuicaos_on_tipoRegistro_id", using: :btree
 
+  create_table "atribuicaos_cartorios", force: true do |t|
+    t.integer "cartorio_id"
+    t.integer "atribuicao_id"
+  end
+
+  add_index "atribuicaos_cartorios", ["atribuicao_id"], name: "index_atribuicaos_cartorios_on_atribuicao_id", using: :btree
+  add_index "atribuicaos_cartorios", ["cartorio_id"], name: "index_atribuicaos_cartorios_on_cartorio_id", using: :btree
+
   create_table "cartorios", force: true do |t|
     t.integer  "codigo"
     t.string   "nome"
-    t.integer  "atribuicao_id"
     t.integer  "comarca_id"
     t.integer  "cidade_id"
     t.string   "bairro"
@@ -44,7 +51,6 @@ ActiveRecord::Schema.define(version: 20130729122605) do
     t.datetime "updated_at"
   end
 
-  add_index "cartorios", ["atribuicao_id"], name: "index_cartorios_on_atribuicao_id", using: :btree
   add_index "cartorios", ["bairro"], name: "index_cartorios_on_bairro", using: :btree
   add_index "cartorios", ["cep"], name: "index_cartorios_on_cep", using: :btree
   add_index "cartorios", ["cidade_id"], name: "index_cartorios_on_cidade_id", using: :btree

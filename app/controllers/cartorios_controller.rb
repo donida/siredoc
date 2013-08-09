@@ -16,40 +16,58 @@ class CartoriosController < ApplicationController
 
   # GET /cartorios/new
   def new
-    @cartorio = Cartorio.new
-    @estados = Estado.all
-    @cidades = []
-    @comarcas = Comarca.all
     @tipoRegistros = TipoRegistro.all
-    @atribuicoes = []
+    @cartorio = Cartorio.new
+    @estado = Estado.where("nome = ?", 'Santa Catarina').take
+    @cidades = Cidade.where("estado_id = ?", @estado.id)
+    @comarcas = Comarca.all
+    @atribuicaos = []
+    @tipoRegistro = nil
   end
 
   # GET /cartorios/1/edit
   def edit
-    @estados = Estado.all
-    @cidades = Cidade.all
-    #.find_by_estado_id(params[@cartorio.cidade.estado_id])
-    @comarcas = Comarca.all
     @tipoRegistros = TipoRegistro.all
-    @atribuicoes = Atribuicao.all
-    #find_by_tipoRegistro_id(params[@cartorio.atribuicao.tipoRegistro.id])
+    @estado = Estado.where("nome = ?", 'Santa Catarina').take
+    @cidades = Cidade.where("estado_id = ?", @estado.id)
+    @comarcas = Comarca.all
+    @id_tipo_registro = nil
+    for atribuicao in @cartorio.atribuicaos
+      @id_tipo_registro = atribuicao.tipoRegistro_id
+    end 
+    if @id_tipo_registro != nil
+      @tipoRegistro = TipoRegistro.find(@id_tipo_registro)
+      @atribuicaos = Atribuicao.where('"tipoRegistro_id" = ?', @id_tipo_registro)
+    else
+      @atribuicaos = []
+      @tipoRegistro = nil
+    end
   end
 
   # POST /cartorios
   # POST /cartorios.json
   def create
     @cartorio = Cartorio.new(cartorio_params)
-
+    
     respond_to do |format|
       if @cartorio.save
-        format.html { redirect_to @cartorio, notice: 'Cartorio was successfully created.' }
+        for atr_id in params[:cartorio][:atribuicaos] 
+          if atr_id != '' && atr_id != nil
+           @atribuicaosCartorios = AtribuicaosCartorios.new
+           @atribuicaosCartorios.cartorio_id = @cartorio.id
+           @atribuicaosCartorios.atribuicao_id = atr_id
+           @atribuicaosCartorios.save
+          end
+        end
+        format.html { redirect_to @cartorio, notice: 'Cartorio nao foi criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @cartorio }
       else
-        @atribuicoes = []
-        @comarcas = Comarca.all
-        @estados = Estado.all
-        @cidades = []
         @tipoRegistros = TipoRegistro.all
+        @comarcas = Comarca.all
+        @estado = Estado.where("nome = ?", 'Santa Catarina').take
+        @cidades = Cidade.where("estado_id = ?", @estado.id)
+        @atribuicaos = []
+        @tipoRegistro = nil
         format.html { render action: 'new' }
         format.json { render json: @cartorio.errors, status: :unprocessable_entity }
       end
@@ -61,9 +79,27 @@ class CartoriosController < ApplicationController
   def update
     respond_to do |format|
       if @cartorio.update(cartorio_params)
-        format.html { redirect_to @cartorio, notice: 'Cartorio was successfully updated.' }
+        @atribuicaosCartorioss = AtribuicaosCartorios.where("cartorio_id = ?", @cartorio.id)
+        for atribuicaosCartorios in @atribuicaosCartorioss 
+          atribuicaosCartorios.destroy
+        end
+        for atr_id in params[:cartorio][:atribuicaos] 
+          if atr_id != '' && atr_id != nil
+           @atribuicaosCartorios = AtribuicaosCartorios.new
+           @atribuicaosCartorios.cartorio_id = @cartorio.id
+           @atribuicaosCartorios.atribuicao_id = atr_id
+           @atribuicaosCartorios.save
+          end
+        end
+        format.html { redirect_to @cartorio, notice: 'Cartorio nao foi atualizado com sucesso.' }
         format.json { head :no_content }
       else
+        @tipoRegistros = TipoRegistro.all
+        @estado = Estado.where("nome = ?", 'Santa Catarina').take
+        @cidades = Cidade.where("estado_id = ?", @estado.id)
+        @comarcas = Comarca.all
+        @atribuicaos = []
+        @tipoRegistro = nil
         format.html { render action: 'edit' }
         format.json { render json: @cartorio.errors, status: :unprocessable_entity }
       end
@@ -114,6 +150,6 @@ class CartoriosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cartorio_params
-      params.require(:cartorio).permit(:codigo, :nome, :atribuicao_id, :comarca_id, :cidade_id, :bairro, :rua, :numero, :complemento, :cep, :telefone, :celular, :email, :historico)
+      params.require(:cartorio).permit(:codigo, :nome, :atribuicaos, :atribuicao_ids, :comarca_id, :cidade_id, :bairro, :rua, :numero, :complemento, :cep, :telefone, :celular, :email, :historico)
     end
 end

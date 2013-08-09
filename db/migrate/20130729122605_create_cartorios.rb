@@ -3,7 +3,6 @@ class CreateCartorios < ActiveRecord::Migration
     create_table :cartorios do |t|
       t.integer :codigo
       t.string :nome
-      t.references :atribuicao, index: true
       t.references :comarca, index: true
       t.references :cidade, index: true
       t.string :bairro

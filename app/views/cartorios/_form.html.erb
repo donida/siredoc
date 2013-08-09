@@ -1,91 +1,113 @@
 <script type="text/javascript">
-function carregar_cidades_div(estado_id) {
-	jQuery.ajax({
-		url : "/update_cidades",
-		type : "GET",
-		dataType : "json",
-		contentType : "application/json",
-		data : {
-			"estado_id" : estado_id
-		},
-		success : function(data) {
-			var select = jQuery('#cartorio_cidade_id');
-			var options = null;
-			if(select.prop)
-				options = select.prop('options');
-			else
-				options = select.attr('options');
-			var temp = options[0];			
-			$('option', select).remove();
-			options[options.length] = temp;
-			if (!$.isArray(data))
-				data = [data];
-			$.each(data, function(pos, obj) {
-				options[options.length] = new Option(obj.nome, obj.id)
-			});
-		}
-	});
-}
+	function carregar_cidades_div(estado_id) {
+		jQuery.ajax({
+			url : "/update_cidades",
+			type : "GET",
+			dataType : "json",
+			contentType : "application/json",
+			data : {
+				"estado_id" : estado_id
+			},
+			success : function(data) {
+				/*
+				 var select = jQuery('#cartorio_cidade_id');
+				 var options = null;
+				 if (select.prop)
+				 options = select.prop('options');
+				 else
+				 options = select.attr('options');
+				 var temp = options[0];
+				 $('option', select).remove();
+				 options[options.length] = temp;
+				 if (!$.isArray(data))
+				 data = [data];
+				 $.each(data, function(pos, obj) {
+				 options[options.length] = new Option(obj.nome, obj.id)
+				 });
+				 */
+			}
+		});
+	}
 
-function carregar_atribuicoes_div(tipoRegistro_id) {
-	jQuery.ajax({
-		url : "/update_atribuicoes",
-		type : "GET",
-		dataType : "json",
-		contentType : "application/json",
-		data : {
-			"tipoRegistro_id" : tipoRegistro_id
-		},
-		success : function(data) {
-			var select = jQuery('#cartorio_atribuicao_id');
-			var options = null;
-			if(select.prop)
-				options = select.prop('options');
-			else
-				options = select.attr('options');
-			var temp = options[0];			
-			$('option', select).remove();
-			options[options.length] = temp;
-			if (!$.isArray(data))
-				data = [data];
-			$.each(data, function(pos, obj, a, b) {
-				options[options.length] = new Option(obj.nome, obj.id);
-			});
-		}
-	});
-}
+	function carregar_atribuicoes_div(tipoRegistro_id) {
+		jQuery.ajax({
+			url : "/update_atribuicoes",
+			type : "GET",
+			dataType : "json",
+			contentType : "application/json",
+			data : {
+				"tipoRegistro_id" : tipoRegistro_id
+			},
+			success : function(data) {
+				 var select = jQuery('#cartorio_atribuicaos');
+				 var options = null;
+				 if (select.prop)
+				 options = select.prop('options');
+				 else
+				 options = select.attr('options');
+				 $('option', select).remove();
+				 if (!$.isArray(data))
+				 data = [data];
+				 $.each(data, function(pos, obj) {
+				 options[options.length] = new Option(obj.nome, obj.id);
+				 });
+			}
+		});
+	}
+
+	function enviar_atribuicoes() {
+		//TODO preparar atribuicoes para enviar junto ao formulario.
+	}
+
 </script>
-<%= form_for @cartorio, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :html => { :class => 'form-horizontal' } do |f| %>
-      <%= f.text_field :codigo, :class => 'text_field' %>
-      <%= f.text_field :nome, :class => 'text_field' %>
-	  <div class="control-group">
-	    <%= f.label :tipoRegistro_id, :class => 'control-label' %>
-	    <div class="controls">
-	  		<%= collection_select(:tipoRegistro_id, :tipoRegistro_id, @tipoRegistros, :id, :nome, {:prompt => true}, :onchange => "carregar_atribuicoes_div(this.value)")  %>
-	    </div>
-	  </div>
-	  <%= f.collection_select :atribuicao_id, @atribuicoes, :id, :nome, {:prompt => true} %>
-	  <%= f.collection_select :comarca_id, @comarcas, :id, :nome, {:prompt => true} %>
-	  <div class="control-group">
-	    <%= f.label :estado_id, :class => 'control-label' %>
-	    <div class="controls">
-	  		<%= collection_select(:estado_id, :estado_id, @estados, :id, :nome, {:prompt => true}, :onchange => "carregar_cidades_div(this.value)")  %>
-	    </div>
-	  </div>
-	  <%= f.collection_select :cidade_id, @cidades, :id, :nome, {:prompt => true} %>
-      <%= f.text_field :bairro, :class => 'text_field' %>
-      <%= f.text_field :rua, :class => 'text_field' %>
-      <%= f.text_field :numero, :class => 'text_field' %>
-      <%= f.text_field :complemento, :class => 'text_field' %>
-      <%= f.text_field :cep, :class => 'text_field' %>
-      <%= f.text_field :telefone, :class => 'text_field' %>
-      <%= f.text_field :celular, :class => 'text_field' %>
-      <%= f.text_field :email, :class => 'text_field' %>
-      <%= f.text_field :historico, :class => 'text_field' %>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                cartorios_path, :class => 'btn' %>
-  </div>
+<%= form_for @cartorio, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :html => { :class => 'form-horizontal' }  do |f| %>
+	<% if @cartorio.id != nil && @cartorio.id != '' %>
+		<div class=" text_field control-group codigo">
+			<label class="control-label" for="cartorio_codigo">Código</label>
+			<div class="controls">
+				<input class="input-small" type="text" value="<%= @cartorio.id %>" readonly="readonly">
+			</div>
+		</div>
+	<% end %>
+	<%= f.text_field :nome, :class=>"input-xxlarge" %>
+	<div class="control-group">
+	  <%= f.label :tipoRegistro_id, :class => 'control-label' %>
+	  <div class="controls">
+	    <%= collection_select(:tipoRegistro_id, :tipoRegistro_id, @tipoRegistros, :id, :nome, {:prompt => true}, :onchange => "carregar_atribuicoes_div(this.value)")  %>
+	  </div>
+	</div>
+	<%= f.collection_select :atribuicaos, @atribuicaos, :id, :nome, {:prompt => true}, :multiple => true, :name => 'cartorio[atribuicaos][]' %>
+	<%= f.collection_select :comarca_id, @comarcas, :id, :nome, {:prompt => true} %>
+	<%= f.collection_select :cidade_id, @cidades, :id, :nome, {:prompt => true} %>
+	<%= f.text_field :bairro, :class=>"input-xxlarge" %>
+	<%= f.text_field :rua, :class=>"input-xxlarge" %>
+	<%= f.number_field :numero, :class=>"input-small" %>
+	<%= f.text_field :complemento, :class=>"input-small" %>
+	<%= f.text_field :cep, :class=>"input-small", :pattern => "[0-9]{5}-[0-9]{3}" %>
+	<%= f.text_field :telefone, :class=>"input-xlarge" %>
+	<%= f.text_field :celular, :class=>"input-xlarge" %>
+	<%= f.email_field :email, :class=>"input-xxlarge" %>
+	<%= f.text_area :historico, :rows => 6, :class=>"input-xxlarge" %>
+	<div class="form-actions">
+		<%= f.submit nil, :class => 'btn btn-primary', :onclick => "enviar_atribuicoes()" %>
+		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+		cartorios_path, :class => 'btn' %>
+	</div>
 <% end %>
+
+<script type="text/javascript">
+
+$(function() {
+   		<% for atribuicao in @cartorio.atribuicaos %>
+		$('#cartorio_atribuicaos option[value=' + <%= atribuicao.id %> + ']').attr('selected', true);
+		<% end %>
+		
+   		<% if @tipoRegistro != nil %>
+		$('#tipoRegistro_id_tipoRegistro_id').val('<%= @tipoRegistro.id %>');
+		<% end %>
+				
+    });
+    
+    
+</script>

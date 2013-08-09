@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  cartorio_id: 
+  atribuicao_id: 
+
+two:
+  cartorio_id: 
+  atribuicao_id: 

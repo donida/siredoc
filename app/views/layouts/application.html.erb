@@ -12,75 +12,83 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
 	<body>
-		<div class="navbar navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
-					<a class="brand" href="/">Siredoc - Cadastros</a>
-					<div class="nav-collapse">
-						<ul class="nav">
-							<% if user_signed_in? %>
-							<% if current_user.admin? %>
-							<li>
-								<%= link_to "Atribuição", atribuicaos_path %>
-							</li>
-							<li>
-								<%= link_to "Comarca", comarcas_path %>
-							</li>
-							<li>
-								<%= link_to "Tipo de Registro", tipo_registros_path %>
-							</li>
-							<li>
-								<%= link_to "Estado", estados_path %>
-							</li>
-							<li>
-								<%= link_to "Cidade", cidades_path %>
-							</li>
-							<li>
-								<%= link_to "Usuário", users_path %>
-							</li>
-							<% end %>
-							<li>
-								<%= link_to "Cartório", cartorios_path %>
-							</li>
-							<li>
-								<%= link_to "Trocar Senha", edit_user_path(current_user.id) %>
-							</li>
-							<li>
-								<%= link_to "Sair", destroy_user_session_path, :method=>'delete' %>
-							</li>
-							<% else %>
-							<li>
-								<%= link_to "Entrar", new_user_session_path, :method => 'new' %>
-							</li>
-							<li>
-								<%= link_to "Esqueci Minha Senha", new_user_password_path %>
-							</li>
-							<% end %>
-							<li>
-								<%= link_to "Fale Conosco" %>
-							</li>
-						</ul>
+		<div class="container" >
+			<h2 style="margin-bottom: 0px">SIREDOC</h2>
+			<p>
+				<small>Associação dos Oficiais do Registro Civil
+			</p>
+			<h4 style="margin-top: 0px">Controle de Associados</h4>
+			<div class="navbar navbar-inverse">
+				<div class="navbar-inner">
+					<div class="container">
+						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </a>
+						<div class="nav-collapse">
+							<ul class="nav nav-pills">
+								<% if user_signed_in? %>
+								<% if current_user.admin? %>
+								<li>
+									<%= link_to "Atribuição", atribuicaos_path %>
+								</li>
+								<li>
+									<%= link_to "Comarca", comarcas_path %>
+								</li>
+								<li>
+									<%= link_to "Tipo de Registro", tipo_registros_path %>
+								</li>
+								<li>
+									<%= link_to "Estado", estados_path %>
+								</li>
+								<li>
+									<%= link_to "Cidade", cidades_path %>
+								</li>
+								<li>
+									<%= link_to "Usuário", users_path %>
+								</li>
+								<% end %>
+								<li>
+									<%= link_to "Usuário", users_path %>
+								</li>
+								<li>
+									<%= link_to "Cartório", cartorios_path %>
+								</li>
+								<li>
+									<%= link_to "Trocar Senha", edit_user_path(current_user.id) %>
+								</li>
+								<li>
+									<%= link_to "Sair", destroy_user_session_path, :method=>'delete' %>
+								</li>
+								<% else %>
+								<li>
+									<%= link_to "Entrar", new_user_session_path, :method => 'new' %>
+								</li>
+								<li>
+									<%= link_to "Esqueci Minha Senha", new_user_password_path %>
+								</li>
+								<% end %>
+								<li>
+									<%= link_to "Fale Conosco" %>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="span12">
+						<% if notice != nil && notice != '' && alert != nil && alert != '' %>
+						<p class="notice">
+							<%= notice %>
+						</p>
+						<p class="alert">
+							<%= alert %>
+						</p>
+						<% end %>
+						<%= yield %>
+						<%= yield :scripts %>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container">
-			<div class="row">
-				<div class="span9">
-       					<p class="notice"><%= notice %></p>
-       					<p class="alert"><%= alert %></p>
-       					<%= yield %>
-       					<%= yield :scripts %>
-				</div>
-				<div class="span3">
-					<h2>Título Boas Vindas</h2>
-					<p>
-						Texto de Boas Vindas com explicações do objetivo da ferramenta e breves descrições das funcionalidades...
-					</p>
-				</div>
-			</div>
-		</div>
-
 	</body>
 </html>

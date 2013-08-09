@@ -1,17 +1,13 @@
 <%- model_class = Cartorio -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h2><%=t '.title', :default => model_class.model_name.human.titleize %></h2>
 </div>
 
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:codigo) %>:</strong></dt>
-  <dd><%= @cartorio.codigo %></dd>
+  <dd><%= @cartorio.id %></dd>
   <dt><strong><%= model_class.human_attribute_name(:nome) %>:</strong></dt>
   <dd><%= @cartorio.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:tipoRegistro_id) %>:</strong></dt>
-  <dd><%= @cartorio.atribuicao == nil ? 'Não Informado' : @cartorio.atribuicao.tipoRegistro.nome %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:atribuicao_id) %>:</strong></dt>
-  <dd><%= @cartorio.atribuicao_id == nil ? 'Não informado' : @cartorio.atribuicao.nome %></dd>
   <dt><strong><%= model_class.human_attribute_name(:comarca_id) %>:</strong></dt>
   <dd><%= @cartorio.comarca_id == nil ? 'Não informado' : @cartorio.comarca.nome %></dd>
   <dt><strong><%= model_class.human_attribute_name(:cidade_id) %>:</strong></dt>
