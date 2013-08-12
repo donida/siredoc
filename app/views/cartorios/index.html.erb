@@ -16,6 +16,8 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:nome) %></th>
+      <th><%= model_class.human_attribute_name(:tipoRegistro) %></th>
+      <th><%= model_class.human_attribute_name(:atribuicao) %></th>
       <th><%= model_class.human_attribute_name(:telefone) %></th>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:comarca_id) %></th>
@@ -28,6 +30,8 @@
       <tr>
         <td><%= link_to cartorio.id, cartorio_path(cartorio) %></td>
         <td><%= cartorio.nome %></td>
+        <td><%= cartorio.atribuicaos == nil || cartorio.atribuicaos.last == nil ? 'Não informado' : cartorio.atribuicaos.last.tipoRegistro.nome %></td>
+        <td><%= cartorio.atribuicaos == nil || cartorio.atribuicaos.last == nil ? 'Não informado' : cartorio.atribuicaos.map(&:nome).join(', ') %></td>
         <td><%= cartorio.telefone %></td>
         <td><%= cartorio.email %></td>
         <td><%= cartorio.comarca_id == nil ? 'Não informado' : cartorio.comarca.nome %></td>
