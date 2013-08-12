@@ -6,7 +6,8 @@ class CartoriosController < ApplicationController
   # GET /cartorios
   # GET /cartorios.json
   def index
-    @cartorios = Cartorio.paginate(:page => params[:page], :order => 'nome asc', :per_page => 10)
+    #@cartorios = Cartorio.paginate(:page => params[:page], :order => 'nome asc', :per_page => 10)
+    @cartorios = Cartorio.search(params[:search], params[:page])
   end
 
   # GET /cartorios/1
@@ -83,7 +84,7 @@ class CartoriosController < ApplicationController
         for atribuicaosCartorios in @atribuicaosCartorioss 
           atribuicaosCartorios.destroy
         end
-        for atr_id in params[:cartorio][:atribuicaos] 
+        for atr_id in params[:cartorio][:atribuicaos]
           if atr_id != '' && atr_id != nil
            @atribuicaosCartorios = AtribuicaosCartorios.new
            @atribuicaosCartorios.cartorio_id = @cartorio.id

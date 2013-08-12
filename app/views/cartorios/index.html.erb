@@ -2,7 +2,15 @@
 <div class="page-header">
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
+<%= form_tag cartorios_path, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :html => { :class => 'form-horizontal' }, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Pesquisar", :nome => nil, :class => 'btn btn-primary' %>
+<% end %>
+<div class="page_info">
+  <%= page_entries_info @cartorios %>
+</div>
 <%= will_paginate @cartorios, :class => 'flickr_pagination' %>
+
 <table class="table table-striped">
   <thead>
     <tr>
@@ -19,9 +27,9 @@
     <% @cartorios.each do |cartorio| %>
       <tr>
         <td><%= link_to cartorio.id, cartorio_path(cartorio) %></td>
+        <td><%= cartorio.nome %></td>
         <td><%= cartorio.telefone %></td>
         <td><%= cartorio.email %></td>
-        <td><%= cartorio.nome %></td>
         <td><%= cartorio.comarca_id == nil ? 'Não informado' : cartorio.comarca.nome %></td>
         <td><%= cartorio.cidade_id == nil ? 'Não informado' : cartorio.cidade.nome %></td>
         <td>

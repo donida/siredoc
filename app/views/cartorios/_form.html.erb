@@ -1,34 +1,4 @@
 <script type="text/javascript">
-	function carregar_cidades_div(estado_id) {
-		jQuery.ajax({
-			url : "/update_cidades",
-			type : "GET",
-			dataType : "json",
-			contentType : "application/json",
-			data : {
-				"estado_id" : estado_id
-			},
-			success : function(data) {
-				/*
-				 var select = jQuery('#cartorio_cidade_id');
-				 var options = null;
-				 if (select.prop)
-				 options = select.prop('options');
-				 else
-				 options = select.attr('options');
-				 var temp = options[0];
-				 $('option', select).remove();
-				 options[options.length] = temp;
-				 if (!$.isArray(data))
-				 data = [data];
-				 $.each(data, function(pos, obj) {
-				 options[options.length] = new Option(obj.nome, obj.id)
-				 });
-				 */
-			}
-		});
-	}
-
 	function carregar_atribuicoes_div(tipoRegistro_id) {
 		jQuery.ajax({
 			url : "/update_atribuicoes",
@@ -53,10 +23,6 @@
 				 });
 			}
 		});
-	}
-
-	function enviar_atribuicoes() {
-		//TODO preparar atribuicoes para enviar junto ao formulario.
 	}
 
 </script>
@@ -88,9 +54,10 @@
 	<%= f.text_field :telefone, :class=>"input-xlarge" %>
 	<%= f.text_field :celular, :class=>"input-xlarge" %>
 	<%= f.email_field :email, :class=>"input-xxlarge" %>
+
 	<%= f.text_area :historico, :rows => 6, :class=>"input-xxlarge" %>
 	<div class="form-actions">
-		<%= f.submit nil, :class => 'btn btn-primary', :onclick => "enviar_atribuicoes()" %>
+		<%= f.submit nil, :class => 'btn btn-primary' %>
 		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
 		cartorios_path, :class => 'btn' %>
 	</div>
@@ -106,7 +73,20 @@ $(function() {
    		<% if @tipoRegistro != nil %>
 		$('#tipoRegistro_id_tipoRegistro_id').val('<%= @tipoRegistro.id %>');
 		<% end %>
-				
+    $('.form-horizontal').bind('submit', function() {
+        var campoAtribuicaos = $('#cartorio_atribuicaos');
+        if (campoAtribuicaos.val() == null || campoAtribuicaos.val().length == 0) {
+            $('.atribuicaos').addClass('error');
+            $('.controls', $('.atribuicaos')).
+                    append('<span class="help-inline">Atribuições não pode ficar em branco</span>')
+            return false;
+        }
+    });
+
+	//help-inline field_with_errors error
+    /*
+     <span class="help-inline">Atribuições não pode ficar em branco</span>
+     */
     });
     
     
