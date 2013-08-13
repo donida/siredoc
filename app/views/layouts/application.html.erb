@@ -73,14 +73,16 @@
 			<div class="container">
 				<div class="row">
 					<div class="span12">
-						<% if notice != nil && notice != '' && alert != nil && alert != '' %>
+						<% if notice != nil && notice != '' %>
 						<p class="notice">
 							<%= notice %>
 						</p>
+                      <% end %>
+                      <% if alert != nil && alert != '' %>
 						<p class="alert">
 							<%= alert %>
 						</p>
-						<% end %>
+                      <% end %>
 						<%= yield %>
 						<%= yield :scripts %>
 					</div>

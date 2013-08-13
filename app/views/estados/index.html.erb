@@ -2,7 +2,7 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<%= will_paginate @estados, :class => 'flickr_pagination' %>
+<%= will_paginate @estados, :class => 'apple_pagination' %>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -35,5 +35,5 @@
   <div class="form-actions">
 		<%= link_to t('.new', :default => t("helpers.links.new")),
         	    new_estado_path,
-            	:class => 'btn btn-primary' %>
+            	:class => 'btn btn-inverse' %>
   </div>

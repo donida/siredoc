@@ -3,7 +3,7 @@
       <%= f.text_field :sigla %>
 	  <%= f.collection_select :estado_id, Estado.all, :id, :nome %>
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit nil, :class => 'btn btn-inverse' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 cidades_path, :class => 'btn' %>
   </div>
