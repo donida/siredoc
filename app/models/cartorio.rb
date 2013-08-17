@@ -1,3 +1,4 @@
+
 class Cartorio < ActiveRecord::Base
   belongs_to :comarca
   belongs_to :cidade

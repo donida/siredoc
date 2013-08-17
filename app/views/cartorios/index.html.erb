@@ -1,10 +1,21 @@
+<script type="text/javascript">
+    function abrirPopup() {
+        var url = 'http://54.232.244.242/jasperserver/flow.html?_flowId=viewReportFlow&reportUnit=/reports/siredoc/etiquetas_6182_6282&j_username=siredoc&j_password=siredoc123&output=pdf'
+        var valorFiltro = $('#search').val();
+        url += '&Filtro='+valorFiltro;
+        window.open(url, '_blank');
+    }
+</script>
+
 <%- model_class = Cartorio -%>
 <div class="page-header">
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
 <%= form_tag cartorios_path, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :html => { :class => 'form-horizontal' }, :method => 'get' do %>
-      <%= text_field_tag :search, params[:search] %>
+      <%= text_field_tag :search, params[:search] %>&nbsp;
       <%= submit_tag "Pesquisar", :nome => nil, :class => 'btn btn-inverse' %>
+    &nbsp;<a target="_blank" href="#" onclick="abrirPopup()"
+       class="btn btn-inverse">Imprimir Etiquetas</a>
 <% end %>
 <div class="page_info">
   <%= page_entries_info @cartorios %>
