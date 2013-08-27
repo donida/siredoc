@@ -7,7 +7,10 @@ class CartoriosController < ApplicationController
   # GET /cartorios.json
   def index
     #@cartorios = Cartorio.paginate(:page => params[:page], :order => 'nome asc', :per_page => 10)
-    @cartorios = Cartorio.search(params[:search], params[:page])
+    @cartorios = Cartorio.search(params[:nome], params[:cidade_nome], params[:atribuicao_nome], params[:tipoRegistro_nome], params[:comarca_nome], params[:page])
+    @tipoRegistros = TipoRegistro.order('nome asc')
+    @comarcas = Comarca.order('nome asc')
+    @atribuicaos = Atribuicao.order('nome asc')
   end
 
   # GET /cartorios/1
@@ -19,26 +22,29 @@ class CartoriosController < ApplicationController
   def new
     @tipoRegistros = TipoRegistro.all
     @cartorio = Cartorio.new
+    @estados = Estado.order("nome asc")
     @estado = Estado.where("nome = ?", 'Santa Catarina').take
-    @cidades = Cidade.where("estado_id = ?", @estado.id)
-    @comarcas = Comarca.all
+    @cidades = Cidade.where("estado_id = ?", @estado.id).order('nome asc')
+    @comarcas = Comarca.order('nome asc')
     @atribuicaos = []
     @tipoRegistro = nil
   end
 
   # GET /cartorios/1/edit
   def edit
+    @cartorio = Cartorio.find(params[:id])
+    @estado = Estado.find(@cartorio.cidade.estado_id)
     @tipoRegistros = TipoRegistro.all
-    @estado = Estado.where("nome = ?", 'Santa Catarina').take
-    @cidades = Cidade.where("estado_id = ?", @estado.id)
-    @comarcas = Comarca.all
+    @estados = Estado.order("nome asc")
+    @cidades = Cidade.where("estado_id = ?", @estado.id).order('nome asc')
+    @comarcas = Comarca.order('nome asc')
     @id_tipo_registro = nil
     for atribuicao in @cartorio.atribuicaos
       @id_tipo_registro = atribuicao.tipoRegistro_id
     end 
     if @id_tipo_registro != nil
       @tipoRegistro = TipoRegistro.find(@id_tipo_registro)
-      @atribuicaos = Atribuicao.where('"tipoRegistro_id" = ?', @id_tipo_registro)
+      @atribuicaos = Atribuicao.where('"tipoRegistro_id" = ?', @id_tipo_registro).order('nome asc')
     else
       @atribuicaos = []
       @tipoRegistro = nil
@@ -63,10 +69,11 @@ class CartoriosController < ApplicationController
         format.html { redirect_to @cartorio, notice: 'Cartorio nao foi criado com sucesso.' }
         format.json { render action: 'show', status: :created, location: @cartorio }
       else
-        @tipoRegistros = TipoRegistro.all
-        @comarcas = Comarca.all
-        @estado = Estado.where("nome = ?", 'Santa Catarina').take
-        @cidades = Cidade.where("estado_id = ?", @estado.id)
+        @tipoRegistros = TipoRegistro.order('nome asc')
+        @comarcas = Comarca.order('nome asc')
+        @estados = Estado.order("nome asc")
+        @estado = Estado.find(@cartorio.cidade.estado_id)
+        @cidades = Cidade.where("estado_id = ?", @estado.id).order('nome asc')
         @atribuicaos = []
         @tipoRegistro = nil
         format.html { render action: 'new' }
@@ -95,10 +102,11 @@ class CartoriosController < ApplicationController
         format.html { redirect_to @cartorio, notice: 'Cartorio nao foi atualizado com sucesso.' }
         format.json { head :no_content }
       else
-        @tipoRegistros = TipoRegistro.all
-        @estado = Estado.where("nome = ?", 'Santa Catarina').take
-        @cidades = Cidade.where("estado_id = ?", @estado.id)
-        @comarcas = Comarca.all
+        @tipoRegistros = TipoRegistro.order('nome asc')
+        @estados = Estado.order("nome asc")
+        @estado = Estado.find(@cartorio.cidade.estado_id)
+        @cidades = Cidade.where("estado_id = ?", @estado.id).order('nome asc')
+        @comarcas = Comarca.order('nome asc')
         @atribuicaos = []
         @tipoRegistro = nil
         format.html { render action: 'edit' }
@@ -151,6 +159,6 @@ class CartoriosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cartorio_params
-      params.require(:cartorio).permit(:codigo, :nome, :atribuicaos, :atribuicao_ids, :comarca_id, :cidade_id, :bairro, :rua, :numero, :complemento, :cep, :telefone, :celular, :email, :historico)
+      params.require(:cartorio).permit(:codigo, :nome, :atribuicaos, :atribuicao_ids, :comarca_id, :cidade_id, :bairro, :rua, :numero, :complemento, :cep, :telefone, :celular, :email, :historico, :associado)
     end
 end

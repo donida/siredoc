@@ -12,13 +12,54 @@
   <h2><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h2>
 </div>
 <%= form_tag cartorios_path, :builder => MNE::TwitterBootstrapFormBuilder::FormBuilder, :html => { :class => 'form-horizontal' }, :method => 'get' do %>
-      <%= text_field_tag :search, params[:search] %>&nbsp;
-      <%= submit_tag "Pesquisar", :nome => nil, :class => 'btn btn-inverse' %>
-    &nbsp;<a target="_blank" href="#" onclick="abrirPopup()"
-       class="btn btn-inverse">Imprimir Etiquetas</a>
+    <div class="container">
+        <div class="row">
+          <div class="span3">
+            <label class="control-label" for="nome">Nome</label>
+            <%= text_field_tag :nome, params[:nome], :class=>"input-xlarge" %>
+          </div>
+          <div class="span3">
+            <label class="control-label" for="nome">Comarca</label>
+            <%= text_field_tag :comarca_nome, params[:comarca_nome], :class=>"input-xlarge" %>
+          </div>
+          <div class="span3">
+            <label class="control-label" for="nome">Cidade</label>
+            <%= text_field_tag :cidade_nome, params[:cidade_nome], :class=>"input-xlarge" %>
+          </div>
+        </div>
+      <div class="row">
+        <div class="span3">
+          <label class="control-label" for="nome">Atribuição</label>
+          <%= text_field_tag :atribuicao_nome, params[:atribuicao_nome], :class=>"input-xlarge" %>
+        </div>
+        <div class="span3">
+          <label class="control-label" for="nome">Registro</label>
+          <%= text_field_tag :tipoRegistro_nome, params[:tipoRegistro_nome], :class=>"input-xlarge" %>
+        </div>
+        <div class="span3">
+          <label class="control-label" for="nome">Comarca</label>
+          <%= text_field_tag :comarca_nome, params[:comarca_nome], :class=>"input-xlarge" %>
+        </div>
+        <div class="span1">
+        </div>
+        <div class="span2">
+            <%= submit_tag "Pesquisar", :nome => nil, :class => 'btn btn-inverse' %>
+        </div>
+      </div>
+    </div>
 <% end %>
 <div class="page_info">
-  <%= page_entries_info @cartorios %>
+  <hr style="margin: 5px">
+  <div class="container">
+    <div class="row">
+      <div class="span1">
+          </div>
+      <div class="span11" >
+        <%= page_entries_info @cartorios %>
+      </div>
+    </div>
+  </div>
+  <hr style="margin: 5px">
 </div>
 <%= will_paginate @cartorios, :class => 'apple_pagination' %>
 
@@ -65,4 +106,6 @@
 		<%= link_to t('.new', :default => t("helpers.links.new")),
 	            new_cartorio_path,
     	        :class => 'btn btn-inverse' %>
+    &nbsp;<a target="_blank" href="#" onclick="abrirPopup()"
+             class="btn btn-inverse">Imprimir Etiquetas</a>
   </div>

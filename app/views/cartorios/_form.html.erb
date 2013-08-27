@@ -1,4 +1,32 @@
 <script type="text/javascript">
+    function carregar_cidades_div(estado_id) {
+        jQuery.ajax({
+            url : "/update_cidades",
+            type : "GET",
+            dataType : "json",
+            contentType : "application/json",
+            data : {
+                "estado_id" : estado_id
+            },
+            success : function(data) {
+                var select = jQuery('#cartorio_cidade_id');
+                var options = null;
+                if(select.prop)
+                    options = select.prop('options');
+                else
+                    options = select.attr('options');
+//                var temp = options[0];
+                $('option', select).remove();
+//                options[options.length] = temp;
+                if (!$.isArray(data))
+                    data = [data];
+                $.each(data, function(pos, obj) {
+                    options[options.length] = new Option(obj.nome, obj.id)
+                });
+            }
+        });
+    }
+
 	function carregar_atribuicoes_div(tipoRegistro_id) {
 		jQuery.ajax({
 			url : "/update_atribuicoes",
@@ -37,7 +65,8 @@
 		</div>
 	<% end %>
 	<%= f.text_field :nome, :class=>"input-xxlarge" %>
-	<div class="control-group">
+    <%= f.check_box :associado %>
+    <div class="control-group">
 	  <%= f.label :tipoRegistro_id, :class => 'control-label' %>
 	  <div class="controls">
 	    <%= collection_select(:tipoRegistro_id, :tipoRegistro_id, @tipoRegistros, :id, :nome, {:prompt => true}, :onchange => "carregar_atribuicoes_div(this.value)")  %>
@@ -45,11 +74,15 @@
 	</div>
 	<%= f.collection_select :atribuicaos, @atribuicaos, :id, :nome, {:prompt => true}, :multiple => true, :name => 'cartorio[atribuicaos][]' %>
 	<%= f.collection_select :comarca_id, @comarcas, :id, :nome, {:prompt => true} %>
-	<%= f.collection_select :cidade_id, @cidades, :id, :nome, {:prompt => true} %>
+    <div class="control-group">
+      <%= f.label :estado_id, :class => 'control-label' %>
+      <div class="controls">
+        <%= collection_select(:estado_id, :estado_id, @estados, :id, :nome, {:prompt => true}, :onchange => "carregar_cidades_div(this.value)")  %>
+      </div>
+    </div>
+    <%= f.collection_select :cidade_id, @cidades, :id, :nome, {:prompt => true} %>
 	<%= f.text_field :bairro, :class=>"input-xxlarge" %>
 	<%= f.text_field :rua, :class=>"input-xxlarge" %>
-	<%= f.number_field :numero, :class=>"input-small" %>
-	<%= f.text_field :complemento, :class=>"input-small" %>
 	<%= f.text_field :cep, :class=>"input-small", :pattern => "[0-9]{5}-[0-9]{3}" %>
 	<%= f.text_field :telefone, :class=>"input-xlarge" %>
 	<%= f.text_field :celular, :class=>"input-xlarge" %>
@@ -73,6 +106,10 @@ $(function() {
    		<% if @tipoRegistro != nil %>
 		$('#tipoRegistro_id_tipoRegistro_id').val('<%= @tipoRegistro.id %>');
 		<% end %>
+        <% if @estado != nil %>
+        $('#estado_id_estado_id').val('<%= @estado.id %>');
+        <% end %>
+
     $('.form-horizontal').bind('submit', function() {
         var campoAtribuicaos = $('#cartorio_atribuicaos');
         if (campoAtribuicaos.val() == null || campoAtribuicaos.val().length == 0) {

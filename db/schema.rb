@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130805012653) do
+ActiveRecord::Schema.define(version: 20130826221057) do
 
   create_table "atribuicaos", force: true do |t|
     t.string   "nome",            null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20130805012653) do
     t.text     "historico"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "associado"
   end
 
   add_index "cartorios", ["bairro"], name: "index_cartorios_on_bairro", using: :btree
