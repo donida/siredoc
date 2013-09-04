@@ -6,11 +6,20 @@
         var cidade_nome = $('#cidade_nome').val();
         var atribuicao_nome = $('#atribuicao_nome').val();
         var tipoRegistro_nome = $('#tipoRegistro_nome').val();
+        var associado = $('#associado').val();
+        var associadoOr = 'false';
+        if (associado == '') {
+            associado = 'true';
+        } else if (associado == 'true') {
+            associadoOr = 'true';
+        }
         url += '&Nome='+valorNome;
         url += '&ComarcaNome='+comarca_nome;
         url += '&CidadeNome='+cidade_nome;
         url += '&AtribuicaoNome='+atribuicao_nome;
         url += '&TipoRegistroNome='+tipoRegistro_nome;
+        url += '&associado='+associado;
+        url += '&associadoOr='+associadoOr;
         window.open(url, '_blank');
     }
 </script>
