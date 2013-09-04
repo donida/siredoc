@@ -15,9 +15,7 @@
                     options = select.prop('options');
                 else
                     options = select.attr('options');
-//                var temp = options[0];
                 $('option', select).remove();
-//                options[options.length] = temp;
                 if (!$.isArray(data))
                     data = [data];
                 $.each(data, function(pos, obj) {

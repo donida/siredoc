@@ -6,7 +6,7 @@ class CartoriosController < ApplicationController
   # GET /cartorios
   # GET /cartorios.json
   def index
-    #@cartorios = Cartorio.paginate(:page => params[:page], :order => 'nome asc', :per_page => 10)
+    #@associados_itens = ['Sim', 'Não']
     @cartorios = Cartorio.search(params[:nome], params[:cidade_nome], params[:atribuicao_nome], params[:tipoRegistro_nome], params[:comarca_nome], params[:page])
     @tipoRegistros = TipoRegistro.order('nome asc')
     @comarcas = Comarca.order('nome asc')
@@ -23,8 +23,7 @@ class CartoriosController < ApplicationController
     @tipoRegistros = TipoRegistro.all
     @cartorio = Cartorio.new
     @estados = Estado.order("nome asc")
-    @estado = Estado.where("nome = ?", 'Santa Catarina').take
-    @cidades = Cidade.where("estado_id = ?", @estado.id).order('nome asc')
+    @cidades = []
     @comarcas = Comarca.order('nome asc')
     @atribuicaos = []
     @tipoRegistro = nil
@@ -54,11 +53,12 @@ class CartoriosController < ApplicationController
   # POST /cartorios
   # POST /cartorios.json
   def create
-    @cartorio = Cartorio.new(cartorio_params)
-    
     respond_to do |format|
+      @cartorio = Cartorio.new(cartorio_params)
+      @cartorio.numero = -1
+      @cartorio.complemento = 'inexistente'
       if @cartorio.save
-        for atr_id in params[:cartorio][:atribuicaos] 
+        for atr_id in params[:cartorio][:atribuicaos]
           if atr_id != '' && atr_id != nil
            @atribuicaosCartorios = AtribuicaosCartorios.new
            @atribuicaosCartorios.cartorio_id = @cartorio.id
