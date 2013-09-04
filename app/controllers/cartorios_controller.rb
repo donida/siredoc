@@ -6,11 +6,8 @@ class CartoriosController < ApplicationController
   # GET /cartorios
   # GET /cartorios.json
   def index
-    #@associados_itens = ['Sim', 'Não']
-    @cartorios = Cartorio.search(params[:nome], params[:cidade_nome], params[:atribuicao_nome], params[:tipoRegistro_nome], params[:comarca_nome], params[:page])
-    @tipoRegistros = TipoRegistro.order('nome asc')
-    @comarcas = Comarca.order('nome asc')
-    @atribuicaos = Atribuicao.order('nome asc')
+    @associado_param = params[:associado]
+    @cartorios = Cartorio.search(params[:nome], params[:cidade_nome], params[:atribuicao_nome], params[:tipoRegistro_nome], params[:comarca_nome], @associado_param, params[:page])
   end
 
   # GET /cartorios/1

@@ -44,20 +44,32 @@
           <label class="control-label" for="tipoRegistro_nome">Registro</label>
           <%= text_field_tag :tipoRegistro_nome, params[:tipoRegistro_nome], :class=>"input-xlarge" %>
         </div>
-        <div class="span1">
-        </div>
         <div class="span3">
-            <%= submit_tag "Pesquisar", :nome => nil, :class => 'btn btn-inverse' %>
+          <label class="control-label" for="associado">Associado</label>
+          <%= select_tag :associado, options_for_select([["Selecione", ""], ["Sim", true], ["Não", false]]) %>
+        </div>
+        <div class="span2">
+          <br/>
+          <%= submit_tag "Pesquisar", :class => 'btn btn-inverse' %>
         </div>
       </div>
     </div>
+
+    <script type="text/javascript">
+        $(function() {
+
+            <% if @associado_param != nil && @associado_param != '' %>
+            $('#associado').val('<%= @associado_param %>');
+            <% end %>
+
+        });
+    </script>
+
 <% end %>
 <div class="page_info">
   <hr style="margin: 5px">
   <div class="container">
     <div class="row">
-      <div class="span1">
-          </div>
       <div class="span11" >
         <%= page_entries_info @cartorios %>
       </div>

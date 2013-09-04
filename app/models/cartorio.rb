@@ -12,9 +12,13 @@ class Cartorio < ActiveRecord::Base
   validates :celular, length: { minimum: 0, maximum: 30 }
   validates :email, length: { minimum: 0, maximum: 150 }
 
-  def self.search(nome, cidade_nome, atribuicao_nome, tipoRegistro_nome, comarca_nome, page)
+  def self.search(nome, cidade_nome, atribuicao_nome, tipoRegistro_nome, comarca_nome, associado, page)
+    filtro_associado = ''
+    if associado != nil && associado != ''
+      filtro_associado = ' and cartorios.associado = ' + associado
+    end
     paginate :per_page => 10, :page => page,
-             :conditions => ['lower(cartorios.nome) like :nome AND lower(cidades.nome) like :cidade_nome AND lower(atribuicaos.nome) like :atribuicao_nome AND lower(tipo_Registros.nome) like :tipoRegistro_nome AND lower(comarcas.nome) like :comarca_nome',
+             :conditions => ['lower(cartorios.nome) like :nome AND lower(cidades.nome) like :cidade_nome AND lower(atribuicaos.nome) like :atribuicao_nome AND lower(tipo_Registros.nome) like :tipoRegistro_nome AND lower(comarcas.nome) like :comarca_nome '+filtro_associado,
                              {
                                  :nome => "%#{nome}%".downcase,
                                  :cidade_nome => "%#{cidade_nome}%".downcase,
