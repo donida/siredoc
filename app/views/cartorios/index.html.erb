@@ -1,11 +1,11 @@
 <script type="text/javascript">
     function abrirPopup() {
         var url = 'http://54.232.244.242/jasperserver/flow.html?_flowId=viewReportFlow&reportUnit=/reports/siredoc/etiquetas_6182_6282&j_username=siredoc&j_password=siredoc123&output=pdf'
-        var valorNome = $('#nome').val();
-        var comarca_nome = $('#comarca_nome').val();
-        var cidade_nome = $('#cidade_nome').val();
-        var atribuicao_nome = $('#atribuicao_nome').val();
-        var tipoRegistro_nome = $('#tipoRegistro_nome').val();
+        var valorNome = $('#nome').val().toLowerCase();
+        var comarca_nome = $('#comarca_nome').val().toLowerCase();
+        var cidade_nome = $('#cidade_nome').val().toLowerCase();
+        var atribuicao_nome = $('#atribuicao_nome').val().toLowerCase();
+        var tipoRegistro_nome = $('#tipoRegistro_nome').val().toLowerCase();
         var associado = $('#associado').val();
         var associadoOr = 'false';
         if (associado == '') {
