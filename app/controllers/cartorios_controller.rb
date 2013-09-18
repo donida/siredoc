@@ -125,10 +125,11 @@ class CartoriosController < ApplicationController
   def update_cidades
     @cidades = []
     if params[:estado_id] != ''
-      @estado = Estado.find(params[:estado_id])
-      if @estado != nil
-        @cidades = @estado.cidades
-      end
+      @cidades = Cidade.where("estado_id = ?", params[:estado_id]).order('nome asc')
+#      @estado = Estado.find(params[:estado_id])
+#      if @estado != nil
+#        @cidades = @estado.cidades
+#      end
     end
     respond_to do |format|
       format.json { render :json => @cidades }

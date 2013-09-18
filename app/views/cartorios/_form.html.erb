@@ -79,8 +79,8 @@
       </div>
     </div>
     <%= f.collection_select :cidade_id, @cidades, :id, :nome, {:prompt => true} %>
-	<%= f.text_field :bairro, :class=>"input-xxlarge" %>
 	<%= f.text_field :rua, :class=>"input-xxlarge" %>
+	<%= f.text_field :bairro, :class=>"input-xxlarge" %>
 	<%= f.text_field :cep, :class=>"input-small", :pattern => "[0-9]{5}-[0-9]{3}" %>
 	<%= f.text_field :telefone, :class=>"input-xlarge" %>
 	<%= f.text_field :celular, :class=>"input-xlarge" %>
@@ -88,7 +88,7 @@
 
 	<%= f.text_area :historico, :rows => 6, :class=>"input-xxlarge" %>
 	<div class="form-actions">
-		<%= f.submit nil, :class => 'btn btn-inverse' %>
+		<%= f.submit "Gravar", :class => 'btn btn-inverse' %>
 		<%= link_to t('.cancel', :default => t("helpers.links.cancel")),
 		cartorios_path, :class => 'btn' %>
 	</div>

@@ -1,4 +1,5 @@
 <script type="text/javascript">
+  //<!--
     function abrirPopup() {
         var url = 'http://54.232.244.242/jasperserver/flow.html?_flowId=viewReportFlow&reportUnit=/reports/siredoc/etiquetas_6182_6282&j_username=siredoc&j_password=siredoc123&output=pdf'
         var valorNome = $('#nome').val().toLowerCase();
@@ -22,6 +23,7 @@
         url += '&associadoOr='+associadoOr;
         window.open(url);
     }
+    //-->
 </script>
 
 <%- model_class = Cartorio -%>
@@ -131,6 +133,6 @@
 		<%= link_to t('.new', :default => t("helpers.links.new")),
 	            new_cartorio_path,
     	        :class => 'btn btn-inverse' %>
-    &nbsp;<a target="_blank" href="#" onclick="abrirPopup()"
+    &nbsp;<a target="_blank" href="#" onclick="abrirPopup();return false;"
              class="btn btn-inverse">Imprimir Etiquetas</a>
   </div>
