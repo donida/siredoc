@@ -47,7 +47,7 @@ Siredoc::Application.configure do
   config.log_formatter = ::Logger::Formatter.new
 
 #  config.assets.debug = true
-  config.action_mailer.default_url_options = { :host => '54.232.232.32' }
+  config.action_mailer.default_url_options = { :host => 'www.revolua.com' }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
