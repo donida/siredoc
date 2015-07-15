@@ -1,7 +1,13 @@
 source 'https://rubygems.org'
 
+gem 'libv8', '~> 3.16.14.11'
+
+gem 'warbler'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0'
+
+#gem 'railties', '4.0.0'
 
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
@@ -45,7 +51,9 @@ gem 'will_paginate'
 
 # gem 'protected_attributes'
 
-gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
+#gem 'devise-warbler', '~> 2.2.3'
+gem 'devise'
+#gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 
 gem 'tlsmail'
 

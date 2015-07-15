@@ -4,3 +4,8 @@
 require File.expand_path('../config/application', __FILE__)
 
 Siredoc::Application.load_tasks
+
+#require 'warbler'
+
+#Warbler::Task.new
+

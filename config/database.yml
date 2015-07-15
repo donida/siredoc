@@ -36,18 +36,23 @@ test:
   pool: 5
   timeout: 5000
 
-production:
-#  adapter: sqlite3
-#  database: db/production.sqlite3
+#production:
+#  adapter: postgresql
+#  encoding: utf8
+#  database: sirecob
+#  username: postgres
+#  password: revolua123
+#  host: 172.31.27.20
 #  pool: 5
 #  timeout: 5000
+
+production:
   adapter: postgresql
   encoding: utf8
-  database: sirecob
-  username: postgres
-#  password: postgres
-#  host: localhost
+  database: siredoc
+  username: revolua
   password: revolua123
-  host: 172.31.27.20
+  host: revolua.c8d5xp5viyyq.sa-east-1.rds.amazonaws.com
   pool: 5
   timeout: 5000
+

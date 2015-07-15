@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20130826221057) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "atribuicaos", force: true do |t|
     t.string   "nome",            null: false
     t.string   "chave",           null: false
@@ -49,7 +52,7 @@ ActiveRecord::Schema.define(version: 20130826221057) do
     t.text     "historico"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "associado"
+    t.boolean  "associado",   default: false, null: false
   end
 
   add_index "cartorios", ["bairro"], name: "index_cartorios_on_bairro", using: :btree
